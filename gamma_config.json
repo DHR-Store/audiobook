@@ -1,11 +1,11 @@
 {
   "version": 1,
   "variables": {
-    "apiKey": "9b0ed5dab31616027ad7154140b0272d",
-    "baseUrl": "https://gamma.gammacloud.net",
-    "origin": "https://ytmp3.gl",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.3"
-  },
+  "apiKey": "9b0ed5dab31616027ad7154140b0272d",
+  "baseUrl": "https://gamma.gammacloud.net",
+  "origin": "https://ytmp3.gl",
+  "userAgent": "Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Mobile Safari/537.36"
+},
   "steps": [
     {
       "id": "auth",
