@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "variables": {
+    "apiKey": "9b0ed5dab31616027ad7154140b0272d",
+    "baseUrl": "https://gamma.gammacloud.net",
+    "origin": "https://ytmp3.gl",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.3"
+  },
+  "steps": [
+    {
+      "id": "auth",
+      "method": "GET",
+      "url": "{{baseUrl}}/api/v1/auth?api_key={{apiKey}}&_={{timestamp}}",
+      "headers": {
+        "Origin": "{{origin}}",
+        "Referer": "{{origin}}/",
+        "User-Agent": "{{userAgent}}",
+        "Accept": "*/*",
+        "Accept-Language": "en-US,en;q=0.9"
+      },
+      "extract": {
+        "field": "key",
+        "storeAs": "authKey",
+        "successCondition": "err == 0"
+      }
+    },
+    {
+      "id": "init",
+      "method": "GET",
+      "url": "{{baseUrl}}/api/v1/init?_={{timestamp}}",
+      "headers": {
+        "Authorization": "Bearer {{authKey}}",
+        "Origin": "{{origin}}",
+        "Referer": "{{origin}}/",
+        "User-Agent": "{{userAgent}}",
+        "Accept": "*/*",
+        "Accept-Language": "en-US,en;q=0.9"
+      },
+      "extract": {
+        "field": "convertURL",
+        "storeAs": "convertUrl",
+        "successCondition": "error == '0'"
+      }
+    },
+    {
+      "id": "convert",
+      "method": "GET",
+      "url": "{{convertUrl}}?v={{videoId}}&f=mp3&_={{timestamp}}",
+      "headers": {
+        "Origin": "{{origin}}",
+        "Referer": "{{origin}}/",
+        "User-Agent": "{{userAgent}}",
+        "Accept": "*/*",
+        "Accept-Language": "en-US,en;q=0.9"
+      },
+      "extract": {
+        "field": "downloadURL",
+        "storeAs": "downloadUrl",
+        "redirectField": "redirectURL",
+        "redirectFlagField": "redirect",
+        "redirectSuccessValue": 1,
+        "maxRedirects": 5,
+        "successCondition": "error == 0 || error == null"
+      }
+    }
+  ]
+}
